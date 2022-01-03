@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: deploy docker image
 
 on:
   push:
@@ -37,4 +37,4 @@ jobs:
         with:
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/ueckoken/plarail2021-soft-frontend-python:${{ env.IMAGE_TAG }}
+          tags: ghcr.io/ruu413/next-page:${{ env.IMAGE_TAG }}
