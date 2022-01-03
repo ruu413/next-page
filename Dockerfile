@@ -11,5 +11,6 @@ COPY . .
 
 EXPOSE 3000
 # This run the server at default port 3000
-CMD ["npm", "run", "build"]
-CMD ["npm", "run", "start"]
+CMD sh -c "npm install --production --no-progress && \
+npm run build && \
+npm run start"
