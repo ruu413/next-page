@@ -7,7 +7,7 @@ import styles from '../styles/Home.module.css'
 const Home: NextPage = () => {
   return (
     <React.Fragment>
-      <p style={{fontSize: 65}}>てすと</p>
+      <p style={{fontSize: 65}}>おためし</p>
     </React.Fragment>
   )
 }
