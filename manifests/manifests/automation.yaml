@@ -8,7 +8,7 @@ spec:
   interval: 1m0s
   sourceRef:
     kind: GitRepository
-    name: next-page
+    name: flux-system
   git:
     checkout:
       ref:
