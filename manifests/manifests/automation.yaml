@@ -15,7 +15,7 @@ spec:
         branch: main
     commit:
       author:
-        email: asikaga613-kento@yahoo.co.jp
+        email: fluxcdbot@ruuu.dev
         name: fluxcdbot
       messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
     push:
