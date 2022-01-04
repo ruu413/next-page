@@ -7,6 +7,4 @@ metadata:
 spec:
   image: ghcr.io/ruu413/next-page
   interval: 1m0s
-  secretRef:
-    name: regcred
 
