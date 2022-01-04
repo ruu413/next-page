@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: next-page
-          image: next-page:latest
+          image: next-page:6308800-1641246830 # {"$imagepolicy": "next-page"}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000

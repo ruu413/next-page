@@ -1,0 +1,25 @@
+
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: next-page
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: next-page
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: asikaga613-kento@yahoo.co.jp
+        name: fluxcdbot
+      messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
+    push:
+      branch: main
+  update:
+    path: ./manifests/manifests
+    strategy: Setters
