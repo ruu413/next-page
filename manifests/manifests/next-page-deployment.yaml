@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: next-page
-          image: ghcr.io/ruu413/next-page:22ba375-1641382944 # {"$imagepolicy": "flux-system:next-page"}
+          image: ghcr.io/ruu413/next-page:0988474-1641407218 # {"$imagepolicy": "flux-system:next-page"}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
