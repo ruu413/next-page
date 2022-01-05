@@ -22,7 +22,11 @@ const Home: NextPage = () => {
         <ResponsiveAppBar></ResponsiveAppBar>
       </header>
       <main
-        style={{ marginTop: 10, padding: 10, margin: "auto", maxWidth: 800 }}
+        style={{
+          margin: "auto",
+          marginTop: "75px",
+          maxWidth: 800,
+        }}
       >
         <Grid
           container
