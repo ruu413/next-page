@@ -3,20 +3,35 @@ import Head from "next/head";
 import Image from "next/image";
 import React from "react";
 import styles from "../styles/Home.module.css";
-import { AppBar, Toolbar, Typography, Grid, Card } from "@mui/material";
-
+import { AppBar, Toolbar, Typography, Grid, Card, Container } from "@mui/material";
+import ResponsiveAppBar from "../src/resposiveAppbar";
 const Home: NextPage = () => {
   return (
     <React.Fragment>
       <header>
-        <AppBar className="a" position="static">
+        {/*<AppBar className="a" position="static">
           <Toolbar>
+            <Grid></Grid>
             <Typography>るーどっとでぶ</Typography>
+            
+          <nav style={{marginLeft:"80%"}}>
+            <a>top</a>
+            <a>post</a>
+          </nav>
           </Toolbar>
-        </AppBar>
+  </AppBar>*/}
+        <ResponsiveAppBar></ResponsiveAppBar>
       </header>
-      <main style={{marginTop:10, padding:10, margin:"auto", maxWidth:800}}>
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} justifyContent="center" alignItems="center">
+      <main
+        style={{ marginTop: 10, padding: 10, margin: "auto", maxWidth: 800 }}
+      >
+        <Grid
+          container
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+          justifyContent="center"
+          alignItems="center"
+        >
           <Grid item xs={8} md={8}>
             <Card>カード</Card>
           </Grid>
