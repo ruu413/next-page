@@ -1,25 +1,23 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import React from "react";
-import styles from "../styles/Home.module.css";
-import { AppBar, Toolbar, Typography, Grid, Card, Container } from "@mui/material";
-import ResponsiveAppBar from "../src/resposiveAppbar";
+import type { NextPage } from "next"
+import Head from "next/head"
+import { Image } from "../src/image"
+import React from "react"
+import styles from "../styles/Home.module.css"
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  CardActions,
+  Container,
+} from "@mui/material"
+import ResponsiveAppBar from "../src/resposiveAppbar"
 const Home: NextPage = () => {
   return (
     <React.Fragment>
       <header>
-        {/*<AppBar className="a" position="static">
-          <Toolbar>
-            <Grid></Grid>
-            <Typography>るーどっとでぶ</Typography>
-            
-          <nav style={{marginLeft:"80%"}}>
-            <a>top</a>
-            <a>post</a>
-          </nav>
-          </Toolbar>
-  </AppBar>*/}
         <ResponsiveAppBar></ResponsiveAppBar>
       </header>
       <main
@@ -33,22 +31,76 @@ const Home: NextPage = () => {
           alignItems="center"
         >
           <Grid item xs={8} md={8}>
-            <Card>カード</Card>
+            <Card>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  あばうとみー
+                </Typography>
+                <Grid
+                  container
+                  columns={{ xs: 4, sm: 8, md: 12 }}
+                  spacing={{ xs: 2, md: 3 }}
+                >
+                  <Grid item xs={4} sm={3} md={5}>
+                    <Image
+                      src={"/ruu_icon.jpg"}
+                      style={{ width: 300, height: 300 }}
+                    />
+                  </Grid>
+                  <Grid item xs={4} sm={1} md={1}></Grid>
+                  <Grid item xs={4} sm={4} md={6}>
+                    <Typography variant="h5" component="div">
+                      るー
+                    </Typography>
+
+                    <Typography variant="body2" component="div">
+                      電気通信大学の大学院生
+                      <br />
+                      ソフトウェアエンジニアとかやってるオタク
+                      現在当サイトを鋭意(?)制作中なので見ていってね
+                      ここらへんマークダウンで書きたくない？
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
           </Grid>
           <Grid item xs={4}>
-            <Card>カード</Card>
+            <Card>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  まいりんく
+                </Typography>
+                <Typography variant="body2">るー</Typography>
+              </CardContent>
+              <CardActions></CardActions>
+            </Card>
           </Grid>
           <Grid item xs={4}>
-            <Card>カード</Card>
+            <Card>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  ほかのひとのぶろぐとか
+                </Typography>
+                <Typography variant="body2">るー</Typography>
+              </CardContent>
+              <CardActions></CardActions>
+            </Card>
           </Grid>
           <Grid item xs={8}>
-            <Card>カード</Card>
+            <Card>
+              <CardContent>
+                <Typography variant="h5" component="div">
+                  とくに役割のないカード
+                </Typography>
+              </CardContent>
+              <CardActions></CardActions>
+            </Card>
           </Grid>
         </Grid>
-        <p style={{ fontSize: 65 }}>おためし</p>
       </main>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
