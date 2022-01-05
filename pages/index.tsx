@@ -12,6 +12,7 @@ import {
   CardContent,
   CardActions,
   Container,
+  Link,
 } from "@mui/material"
 import ResponsiveAppBar from "../src/resposiveAppbar"
 const Home: NextPage = () => {
@@ -21,7 +22,11 @@ const Home: NextPage = () => {
         <ResponsiveAppBar></ResponsiveAppBar>
       </header>
       <main
-        style={{ marginTop: 10, padding: 10, margin: "auto", maxWidth: 800 }}
+        style={{
+          margin: "auto",
+          marginTop: "75px",
+          maxWidth: 800,
+        }}
       >
         <Grid
           container
@@ -45,7 +50,12 @@ const Home: NextPage = () => {
                     <Image
                       src={"/ruu_icon.jpg"}
                       style={{ width: 300, height: 300 }}
+                      alt="icon painted by DAINZIA"
                     />
+                    <Typography variant="caption" component="div">
+                      painted by{" "}
+                      <Link href="https://twitter.com/DAINZIA/">DAINZIA</Link>
+                    </Typography>
                   </Grid>
                   <Grid item xs={4} sm={1} md={1}></Grid>
                   <Grid item xs={4} sm={4} md={6}>
