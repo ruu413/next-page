@@ -1,8 +1,22 @@
-import type { NextPage } from "next"
+import {
+  GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
+  NextPage,
+} from "next"
+
+import { unified } from "unified"
+import rehypeParse from "rehype-parse"
+import rehypeReact from "rehype-react"
+
 import Head from "next/head"
-import { Image } from "../src/image"
-import React from "react"
+import { Image } from "../components/image"
+import React, { useEffect, useState, FC } from "react"
 import styles from "../styles/Home.module.css"
+
+import CustomLink from "../components/customLink"
+
+import { markdownToHtml } from "../src/transpiler"
 import {
   AppBar,
   Toolbar,
@@ -14,8 +28,50 @@ import {
   Container,
   Link,
 } from "@mui/material"
-import ResponsiveAppBar from "../src/resposiveAppbar"
-const Home: NextPage = () => {
+import ResponsiveAppBar from "../components/resposiveAppbar"
+
+// HTMLをReactへ変換する関数
+const processor = unified()
+  .use(rehypeParse, { fragment: true }) // fragmentは必ずtrueにする
+  .use(rehypeReact, {
+    createElement: React.createElement,
+    components: {
+      a: (props: any) => <CustomLink {...props} />, // ←ここで、<a>を<CustomLink>に置き換えるよう設定
+    },
+  })
+interface Props {
+  aboutMeHTML: string
+}
+const buildContentURL = (url: string): string => {
+  return "https://raw.githubusercontent.com/ruu413/next-page/main/" + url
+}
+export const getStaticProps = async () => {
+  const p = await fetch(buildContentURL("contents/aboutMe.md"))
+  const aboutMeMd = await p.text()
+  const aboutMeHTML = (await markdownToHtml(aboutMeMd)).value
+  return {
+    props: {
+      aboutMeHTML: aboutMeHTML,
+    },
+  }
+}
+
+const HTMLViewer = ({ html }: { html: string }) => {
+  return <React.Fragment>{processor.processSync(html).result}</React.Fragment>
+}
+const MarkdownViewer = ({ markdown }: { markdown: string }) => {
+  const [html, setHtml] = useState<string>("")
+  useEffect(() => {
+    markdownToHtml(markdown).then((result) => {
+      if (typeof result.value === "string") {
+        setHtml(result.value)
+      }
+    })
+  }, [markdown])
+  return <HTMLViewer html={html} />
+}
+
+const Home: NextPage<Props> = ({ aboutMeHTML }) => {
   return (
     <React.Fragment>
       <header>
@@ -59,17 +115,7 @@ const Home: NextPage = () => {
                   </Grid>
                   <Grid item xs={4} sm={1} md={1}></Grid>
                   <Grid item xs={4} sm={4} md={6}>
-                    <Typography variant="h5" component="div">
-                      るー
-                    </Typography>
-
-                    <Typography variant="body2" component="div">
-                      電気通信大学の大学院生
-                      <br />
-                      ソフトウェアエンジニアとかやってるオタク
-                      現在当サイトを鋭意(?)制作中なので見ていってね
-                      ここらへんマークダウンで書きたくない？
-                    </Typography>
+                    <HTMLViewer html={aboutMeHTML} />
                   </Grid>
                 </Grid>
               </CardContent>
