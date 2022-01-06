@@ -4,6 +4,7 @@ import { ImageProps } from "next/dist/client/image"
 import React, { CSSProperties } from "react"
 
 const ImageWrapper = styled.div`
+  position: relative !important;
   > span {
     position: unset !important;
     height: 100%;

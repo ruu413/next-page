@@ -1,8 +1,22 @@
-import type { NextPage } from "next"
+import {
+  GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
+  NextPage,
+} from "next"
+
+import { unified } from "unified"
+import rehypeParse from "rehype-parse"
+import rehypeReact from "rehype-react"
+
 import Head from "next/head"
 import { Image } from "../src/image"
-import React from "react"
+import React, { useEffect, useState, FC } from "react"
 import styles from "../styles/Home.module.css"
+
+import CustomLink from "../src/customLink"
+
+import { markdownToHtml } from "../src/transpiler"
 import {
   AppBar,
   Toolbar,
@@ -15,20 +29,46 @@ import {
   Link,
 } from "@mui/material"
 import ResponsiveAppBar from "../src/resposiveAppbar"
+import { JsxEmit } from "typescript"
 
+// HTMLをReactへ変換する関数
+const processor = unified()
+  .use(rehypeParse, { fragment: true }) // fragmentは必ずtrueにする
+  .use(rehypeReact, {
+    createElement: React.createElement,
+    components: {
+      a: (props: any) => <CustomLink {...props} />, //CustomLink, //CustomLink, // ←ここで、<a>を<CustomLink>に置き換えるよう設定
+    },
+  })
 interface Props {
-  about: string
+  aboutMd: string
+}
+const buildContentURL = (url: string): string => {
+  return "https://raw.githubusercontent.com/ruu413/next-page/main/" + url
 }
 export const getStaticProps = async () => {
-  const p = await fetch("")
+  const p = await fetch(buildContentURL("contents/about.md"))
+  const aboutMd = await p.text()
+  //const aboutHTML = (await markdownToHtml(aboutMd)).value
   return {
     props: {
-      about: "a",
+      aboutMd: aboutMd,
     },
   }
 }
+const MarkdownViewer = ({ markdown }: { markdown: string }) => {
+  const [html, setHtml] = useState<string>("")
+  useEffect(() => {
+    markdownToHtml(markdown).then((result) => {
+      if (typeof result.value === "string") {
+        setHtml(result.value)
+      }
+    })
+  }, [markdown])
+  return <React.Fragment>{processor.processSync(html).result}</React.Fragment>
+}
 
-const Home: NextPage<Props> = ({ about }) => {
+const Home: NextPage<Props> = ({ aboutMd }) => {
   return (
     <React.Fragment>
       <header>
@@ -83,6 +123,7 @@ const Home: NextPage<Props> = ({ about }) => {
                       現在当サイトを鋭意(?)制作中なので見ていってね
                       ここらへんマークダウンで書きたくない？
                     </Typography>
+                    <MarkdownViewer markdown={aboutMd} />
                   </Grid>
                 </Grid>
               </CardContent>
