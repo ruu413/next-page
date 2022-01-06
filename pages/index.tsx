@@ -15,7 +15,20 @@ import {
   Link,
 } from "@mui/material"
 import ResponsiveAppBar from "../src/resposiveAppbar"
-const Home: NextPage = () => {
+
+interface Props {
+  about: string
+}
+export const getStaticProps = async () => {
+  const p = await fetch("")
+  return {
+    props: {
+      about: "a",
+    },
+  }
+}
+
+const Home: NextPage<Props> = ({ about }) => {
   return (
     <React.Fragment>
       <header>
