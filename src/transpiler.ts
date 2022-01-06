@@ -18,5 +18,5 @@ export const markdownToHtml = async (markdown: string) =>
       }),
     })*/ // shikiハイライターでコードブロックをハイライト
     .use(rehypeStringify) // hastをHTMLに変換
-    .use(rehypeHighlight)
+    .use(rehypeHighlight) // shikiの代わりのハイライト
     .processSync(markdown) // 上記の処理を行うデータをここで受け取る
