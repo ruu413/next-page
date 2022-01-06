@@ -5,16 +5,9 @@ import {
   NextPage,
 } from "next"
 
-import { unified } from "unified"
-import rehypeParse from "rehype-parse"
-import rehypeReact from "rehype-react"
-
 import Head from "next/head"
 import { Image } from "../components/image"
 import React, { useEffect, useState, FC } from "react"
-import styles from "../styles/Home.module.css"
-
-import CustomLink from "../components/customLink"
 
 import { markdownToHtml } from "../src/transpiler"
 import {
@@ -28,17 +21,9 @@ import {
   Container,
   Link,
 } from "@mui/material"
-import ResponsiveAppBar from "../components/resposiveAppbar"
+import PageHead from "../components/PageHead"
+import HTMLViewer from "../components/htmlViewer"
 
-// HTMLをReactへ変換する関数
-const processor = unified()
-  .use(rehypeParse, { fragment: true }) // fragmentは必ずtrueにする
-  .use(rehypeReact, {
-    createElement: React.createElement,
-    components: {
-      a: (props: any) => <CustomLink {...props} />, // ←ここで、<a>を<CustomLink>に置き換えるよう設定
-    },
-  })
 interface Props {
   aboutMeHTML: string
 }
@@ -56,34 +41,11 @@ export const getStaticProps = async () => {
   }
 }
 
-const HTMLViewer = ({ html }: { html: string }) => {
-  return <React.Fragment>{processor.processSync(html).result}</React.Fragment>
-}
-const MarkdownViewer = ({ markdown }: { markdown: string }) => {
-  const [html, setHtml] = useState<string>("")
-  useEffect(() => {
-    markdownToHtml(markdown).then((result) => {
-      if (typeof result.value === "string") {
-        setHtml(result.value)
-      }
-    })
-  }, [markdown])
-  return <HTMLViewer html={html} />
-}
-
 const Home: NextPage<Props> = ({ aboutMeHTML }) => {
   return (
     <React.Fragment>
-      <header>
-        <ResponsiveAppBar></ResponsiveAppBar>
-      </header>
-      <main
-        style={{
-          margin: "auto",
-          marginTop: "75px",
-          maxWidth: 800,
-        }}
-      >
+      <PageHead />
+      <main>
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}
