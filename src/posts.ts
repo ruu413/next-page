@@ -4,19 +4,6 @@ import matter from "gray-matter"
 import { markdownToHtml } from "./transpiler"
 
 //imported from github.com/gotti/gotti.dev
-export interface posts {
-  posts: postData[]
-}
-export interface postData {
-  title: string
-  date: Date
-  tags: string[]
-  text: string
-  url: string
-  name: string
-  path: string
-  ogpImagePath: string
-}
 
 const buildContentURL = (url: string): string => {
   return `https://raw.githubusercontent.com/ruu413/next-page/main/contents/${url}`
@@ -31,6 +18,7 @@ export const fetchContent = async (url: string): Promise<string> => {
   const p = await fetch(buildContentURL(url))
   return await p.text()
 }
+
 export interface PostData {
   title: string
   date: string
@@ -39,12 +27,13 @@ export interface PostData {
   articleMd: string
   path: string
 }
+
 export const fetchPost = async (post: string): Promise<PostData> => {
   const p = await fetch(buildPostURL(post))
   const articleData = await p.text()
   const article = matter(articleData)
   const articleHTML = String((await markdownToHtml(article.content)).value)
-  console.log(article)
+
   return {
     title: article.data["title"],
     date: article.data["date"],
@@ -76,73 +65,24 @@ export const fetchPosts = async (): Promise<PostData[]> => {
   return Promise.all(posts)
 }
 
-/*
-
-const mattertoPostData = (
-  post: string,
-  mpost: matter.GrayMatterFile<string>,
-  ogppath: string
-): postData => {
-  console.log(mpost.data["tags"])
-  //ほんとに引数の型あってる？
-  const ret: postData = {
-    title: mpost.data["title"],
-    date: mpost.data["date"],
-    tags: mpost.data["tags"],
-    text: mpost.content,
-    url: buildSiteURL(post),
-    name: post,
-    path: `/post/${post}`,
-    ogpImagePath: `https://gotti.dev/post/${post}/${ogppath}`,
-  }
-  return ret
-}
-
-export const fetchPost = async (post: string): Promise<postData> => {
-  const p = await fetch(buildPostURL(post))
-  const rawpost = await p.text()
-  const mpost = matter(rawpost)
-  const ipath = mpost.content.match(/\!\[.+\]\((.+)\)/)
-  const imagepath = ipath === null ? "" : ipath[1]
-  const ret = mattertoPostData(post, mpost, imagepath)
-  console.log(ret)
-  return ret
-}
-
-export const fetchPosts = async (): Promise<postData[]> => {
-  const postlist = await fetchPathList()
-  const posts = postlist.map(async (post: string) => {
-    const ret = await fetchPost(post)
-    return ret
-  })
-  const ret = Promise.all(posts)
-  return ret
-}
-
-export interface Tag {
-  name: string
-  posts: postData[]
-}
-
-interface Tags {
-  tags: Tag[]
-}
-
-export const getTags = (posts: postData[]): Tags => {
-  let tags = new Map<string, postData[]>()
+//insert only name not insert posts
+export const fetchTags = async (): Promise<string[]> => {
+  const posts = await fetchPosts()
+  let tags = new Set<string>()
   for (const p of posts) {
     for (const t of p.tags) {
-      if (tags[t] === undefined) {
-        tags[t] = []
+      if (!tags.has(t)) {
+        tags.add(t)
       }
-      tags[t].push(p)
     }
   }
-  let ret: Tags = { tags: [] }
-  for (const t of Object.keys(tags)) {
-    //const tmp: Tag = { name: t, posts: tags[t] }
-    //ret.tags.push(tmp)
-  }
-  return ret
+  return Array.from(tags)
 }
-*/
+
+export const fetchPostsFromTag = async (tag: string): Promise<PostData[]> => {
+  const posts = (await fetchPosts()).filter((post) => {
+    console.log(post.tags, tag, post.tags.includes(tag))
+    return post.tags.includes(tag)
+  })
+  return Promise.all(posts)
+}
