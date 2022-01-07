@@ -1,10 +1,11 @@
 import { FC } from "react"
 import Link from "next/link"
 import PageHead from "../../components/PageHead"
-import { Card } from "@mui/material"
+import { Button, Card, CardContent, Typography } from "@mui/material"
 import matter from "gray-matter"
 import { markdownToHtml } from "../../src/transpiler"
 import HTMLViewer from "../../components/htmlViewer"
+import { typography } from "@mui/system"
 
 const buildContentURL = (url: string): string => {
   return "https://raw.githubusercontent.com/ruu413/next-page/main/" + url
@@ -27,13 +28,14 @@ export const getStaticProps = async ({
 }: {
   params: { article: string }
 }) => {
-  console.log(params)
-  console.log("contents" + params.article + "/index.md")
-  const p = await fetch(buildContentURL("contents" + params.article + ".md"))
+  const p = await fetch(
+    buildContentURL("contents/posts/" + params.article + "/index.md")
+  )
+  console.log(buildContentURL("contents/posts/" + params.article + "/index.md"))
   const articleData = await p.text()
-  console.log("aa", articleData)
   const article = matter(articleData)
   const articleHTML = (await markdownToHtml(article.content)).value
+  console.log(article)
   return {
     props: {
       title: article.data["title"],
@@ -57,7 +59,14 @@ const Article: FC<Props> = ({ title, date, tags, articleHTML }) => {
       <PageHead />
       <main>
         <Card>
-          <HTMLViewer html={articleHTML} />
+          <CardContent>
+            <Typography variant="h1">{title}</Typography>
+            <Typography variant="body2">{date}</Typography>
+            {tags.map((tag) => {
+              ;<Button>{tag}</Button>
+            })}
+            <HTMLViewer html={articleHTML} />
+          </CardContent>
         </Card>
       </main>
     </>
