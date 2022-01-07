@@ -1,11 +1,13 @@
-import { Typography, Button } from "@mui/material"
+import { Typography, Button, Link } from "@mui/material"
 import { PostData } from "../src/posts"
 import HTMLViewer from "./htmlViewer"
 
 const PostSammary = ({ post }: { post: PostData }) => {
   return (
     <>
-      <Typography variant="h1">{post.title}</Typography>
+      <Link href={post.path}>
+        <Typography variant="h1">{post.title}</Typography>
+      </Link>
       <Typography variant="body2">日にち: {post.date}</Typography>
       <Typography variant="body2" component="span">
         {"たぐ: "}
