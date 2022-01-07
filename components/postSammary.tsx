@@ -6,7 +6,7 @@ const PostSammary = ({ post }: { post: PostData }) => {
   return (
     <>
       <Typography variant="h2">
-        <MuiLink href={post.path}>{post.title}</MuiLink>
+        <Link href={post.path}>{post.title}</Link>
       </Typography>
       <Typography variant="body2">日にち: {post.date}</Typography>
       <Typography variant="body2" component="span">
