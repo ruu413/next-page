@@ -11,6 +11,14 @@ a {
   text-decoration: none;
 }
 
+main {
+  margin: auto;
+  margin-top: 75px;
+  max-width: 1000px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 * {
   box-sizing: border-box;
 }
