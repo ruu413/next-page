@@ -23,16 +23,13 @@ import {
 } from "@mui/material"
 import PageHead from "../components/PageHead"
 import HTMLViewer from "../components/htmlViewer"
+import { fetchContent } from "../src/posts"
 
 interface Props {
   aboutMeHTML: string
 }
-const buildContentURL = (url: string): string => {
-  return "https://raw.githubusercontent.com/ruu413/next-page/main/" + url
-}
 export const getStaticProps = async () => {
-  const p = await fetch(buildContentURL("contents/aboutMe.md"))
-  const aboutMeMd = await p.text()
+  const aboutMeMd = await fetchContent("aboutMe.md")
   const aboutMeHTML = (await markdownToHtml(aboutMeMd)).value
   return {
     props: {

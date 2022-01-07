@@ -11,8 +11,12 @@ import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
 import Tooltip from "@mui/material/Tooltip"
 import MenuItem from "@mui/material/MenuItem"
+import { Link } from "@mui/material"
 
-const pages = ["とっぷ", "ぶろぐ"]
+const pages = new Map([
+  ["とっぷ", "/"],
+  ["ぶろぐ", "/posts"],
+])
 
 const PageHead = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
@@ -70,21 +74,24 @@ const PageHead = () => {
                 display: { xs: "flex", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {Array.from(pages.entries()).map(([key, value]) => (
+                <MenuItem key={key} onClick={handleCloseNavMenu}>
+                  <Link href={value}>
+                    <Typography textAlign="center">{key}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {Array.from(pages.entries()).map(([key, value]) => (
               <Button
-                key={page}
+                key={key}
+                href={value}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "#336655", display: "block" }}
               >
-                {page}
+                {key}
               </Button>
             ))}
           </Box>

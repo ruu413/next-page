@@ -1,12 +1,7 @@
-import {
-  buildPostListURL,
-  buildPostURL,
-  buildFileURL,
-  buildSiteURL,
-} from "./settings"
 import * as yaml from "js-yaml"
 import request from "request"
 import matter from "gray-matter"
+import { markdownToHtml } from "./transpiler"
 
 //imported from github.com/gotti/gotti.dev
 export interface posts {
@@ -23,16 +18,65 @@ export interface postData {
   ogpImagePath: string
 }
 
-export const fetchPathList = async (): Promise<string[]> => {
-  const postlist_p = await fetch(buildPostListURL())
-  const postlist: string = await postlist_p.text()
-  return []
-  /*const yamlData: string[] = (yaml.load(postlist) as Object)["posts"]
-  const postNames = posts.map((post) => {
-    return post.replace("./post/", "")
-  })
-  return postNames*/
+const buildContentURL = (url: string): string => {
+  return `https://raw.githubusercontent.com/ruu413/next-page/main/contents/${url}`
 }
+const buildPostURL = (title: string): string => {
+  return buildContentURL(`posts/${title}/index.md`)
+}
+const buildPostsListURL = () => {
+  return buildContentURL("postsList.yaml")
+}
+export const fetchContent = async (url: string): Promise<string> => {
+  const p = await fetch(buildContentURL(url))
+  return await p.text()
+}
+export interface PostData {
+  title: string
+  date: string
+  tags: string[]
+  articleHTML: string
+  articleMd: string
+  path: string
+}
+export const fetchPost = async (post: string): Promise<PostData> => {
+  const p = await fetch(buildPostURL(post))
+  const articleData = await p.text()
+  const article = matter(articleData)
+  const articleHTML = String((await markdownToHtml(article.content)).value)
+  console.log(article)
+  return {
+    title: article.data["title"],
+    date: article.data["date"],
+    tags: article.data["tags"],
+    articleMd: article.content,
+    articleHTML: articleHTML,
+    path: "/posts/" + post,
+  }
+}
+interface PostsListYaml {
+  posts: string[]
+}
+
+export const fetchPostsList = async (): Promise<string[]> => {
+  const p = await fetch(buildPostsListURL())
+  const postsYaml = await p.text()
+  const posts = (yaml.load(postsYaml) as PostsListYaml).posts
+  const postNames = posts.map((post) => {
+    return post.replace("./posts/", "")
+  })
+  return postNames
+}
+
+export const fetchPosts = async (): Promise<PostData[]> => {
+  const postsList = await fetchPostsList()
+  const posts = postsList.map(async (post) => {
+    return await fetchPost(post)
+  })
+  return Promise.all(posts)
+}
+
+/*
 
 const mattertoPostData = (
   post: string,
@@ -87,12 +131,12 @@ interface Tags {
 export const getTags = (posts: postData[]): Tags => {
   let tags = new Map<string, postData[]>()
   for (const p of posts) {
-    /*for (const t of p.tags) {
+    for (const t of p.tags) {
       if (tags[t] === undefined) {
         tags[t] = []
       }
       tags[t].push(p)
-    }*/
+    }
   }
   let ret: Tags = { tags: [] }
   for (const t of Object.keys(tags)) {
@@ -101,3 +145,4 @@ export const getTags = (posts: postData[]): Tags => {
   }
   return ret
 }
+*/
