@@ -7,3 +7,4 @@
 ここらへんマークダウンで書きたくない？
 ![テスト画像](/ruu_icon.jpg)
 <img src="/ruu_icon.jpg" width="100px" height="100px" alt="test">
+a
