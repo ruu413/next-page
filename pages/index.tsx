@@ -19,26 +19,34 @@ import {
   CardContent,
   CardActions,
   Container,
-  Link,
+  Link as MuiLink,
 } from "@mui/material"
 import PageHead from "../components/PageHead"
 import HTMLViewer from "../components/htmlViewer"
 import { fetchContent } from "../src/posts"
-
+import Link from "next/link"
 interface Props {
   aboutMeHTML: string
+  myLinksHTML: string
+  linksHTML: string
 }
 export const getStaticProps = async () => {
   const aboutMeMd = await fetchContent("aboutMe.md")
+  const myLinksMd = await fetchContent("myLinks.md")
+  const linksMd = await fetchContent("links.md")
   const aboutMeHTML = (await markdownToHtml(aboutMeMd)).value
+  const myLinksHTML = (await markdownToHtml(myLinksMd)).value
+  const linksHTML = (await markdownToHtml(linksMd)).value
   return {
     props: {
       aboutMeHTML: aboutMeHTML,
+      myLinksHTML: myLinksHTML,
+      linksHTML: linksHTML,
     },
   }
 }
 
-const Home: NextPage<Props> = ({ aboutMeHTML }) => {
+const Home: NextPage<Props> = ({ aboutMeHTML, myLinksHTML, linksHTML }) => {
   return (
     <React.Fragment>
       <PageHead />
@@ -86,7 +94,7 @@ const Home: NextPage<Props> = ({ aboutMeHTML }) => {
                 <Typography variant="h5" component="div">
                   まいりんく
                 </Typography>
-                <Typography variant="body2">るー</Typography>
+                <HTMLViewer html={myLinksHTML} />
               </CardContent>
               <CardActions></CardActions>
             </Card>
@@ -97,7 +105,7 @@ const Home: NextPage<Props> = ({ aboutMeHTML }) => {
                 <Typography variant="h5" component="div">
                   ほかのひとのぶろぐとか
                 </Typography>
-                <Typography variant="body2">るー</Typography>
+                <HTMLViewer html={linksHTML} />
               </CardContent>
               <CardActions></CardActions>
             </Card>

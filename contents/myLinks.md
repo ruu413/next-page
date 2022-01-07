@@ -1,0 +1,4 @@
+- [Twitter @ruu_uec](https://twitter.com/ruu_uec)
+- [GihHub ruu413](https://github.com/ruu413)
+- [ほしいもの](https://www.amazon.co.jp/wishlist?ref_=ya_d_l_lists)
+- [AtCoder ruu_413](https://atcoder.jp/users/ruu_413)

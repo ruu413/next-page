@@ -14,8 +14,6 @@ export const getStaticPaths = async () => {
   const paths = posts.map((p) => {
     return `/posts/${p}`
   })
-  console.log("posts")
-  console.log(paths)
   return {
     paths,
     fallback: false,
