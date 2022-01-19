@@ -9,10 +9,6 @@ import {
   Grid,
   Typography,
 } from "@mui/material"
-import matter from "gray-matter"
-import { markdownToHtml } from "../../src/transpiler"
-import HTMLViewer from "../../components/htmlViewer"
-import { typography } from "@mui/system"
 import { fetchPosts, PostData } from "../../src/posts"
 import PostSammary from "../../components/postSammary"
 

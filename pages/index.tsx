@@ -4,9 +4,9 @@ import {
   InferGetStaticPropsType,
   NextPage,
 } from "next"
-
+import Image from "next/image"
 import Head from "next/head"
-import { Image } from "../components/image"
+import CustomImage from "../components/customImage"
 import React, { useEffect, useState, FC } from "react"
 
 import { markdownToHtml } from "../src/transpiler"
@@ -71,9 +71,13 @@ const Home: NextPage<Props> = ({ aboutMeHTML, myLinksHTML, linksHTML }) => {
                 >
                   <Grid item xs={4} sm={3} md={5}>
                     <Image
-                      src={"/ruu_icon.jpg"}
-                      style={{ width: 300, height: 300 }}
+                      //src={"/ruu_icon.jpg"}
+                      src={
+                        "https://raw.githubusercontent.com/ruu413/next-page/main/public/ruu_icon.jpg"
+                      }
                       alt="icon painted by DAINZIA"
+                      width={2891}
+                      height={4096}
                     />
                     <Typography variant="caption" component="div">
                       painted by{" "}
