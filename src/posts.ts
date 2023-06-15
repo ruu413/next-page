@@ -6,7 +6,7 @@ import { markdownToHtml } from "./transpiler"
 //imported from github.com/gotti/gotti.dev
 
 const buildContentURL = (url: string): string => {
-  return `https://raw.githubusercontent.com/ruu413/next-page/main/contents/${url}`
+  return `https://raw.githubusercontent.com/ruu413/next-page/deployment/contents/${url}`
 }
 const buildPostURL = (title: string): string => {
   return buildContentURL(`posts/${title}/index.md`)
