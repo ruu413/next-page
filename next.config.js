@@ -3,5 +3,5 @@ module.exports = {
   output: "export",
   reactStrictMode: true,
   distDir: "out",
-  images: { domains: ["raw.githubusercontent.com"] },
+  images: { domains: ["raw.githubusercontent.com"], unoptimized: true },
 }
