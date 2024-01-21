@@ -6,7 +6,6 @@ import {
 } from "next"
 import Image from "next/image"
 import Head from "next/head"
-import CustomImage from "../components/customImage"
 import React, { useEffect, useState, FC } from "react"
 
 import { markdownToHtml } from "../src/transpiler"
@@ -57,9 +56,15 @@ const Home: NextPage<Props> = ({ aboutMeHTML, myLinksHTML, linksHTML }) => {
           columns={{ xs: 4, sm: 8, md: 12 }}
           justifyContent="center"
           alignItems="center"
+          style={{ display: "flex", alignItems: "stretch" }}
         >
-          <Grid item xs={8} md={8}>
-            <Card>
+          <Grid
+            item
+            xs={8}
+            md={8}
+            style={{ display: "flex", alignItems: "stretch" }}
+          >
+            <Card style={{ width: "100%" }}>
               <CardContent>
                 <Typography variant="h5" component="div">
                   あばうとみー
@@ -68,6 +73,7 @@ const Home: NextPage<Props> = ({ aboutMeHTML, myLinksHTML, linksHTML }) => {
                   container
                   columns={{ xs: 4, sm: 8, md: 12 }}
                   spacing={{ xs: 2, md: 3 }}
+                  style={{ display: "flex", alignItems: "stretch" }}
                 >
                   <Grid item xs={4} sm={3} md={5}>
                     <Image
@@ -78,6 +84,7 @@ const Home: NextPage<Props> = ({ aboutMeHTML, myLinksHTML, linksHTML }) => {
                       alt="icon painted by DAINZIA"
                       width={2891}
                       height={4096}
+                      style={{ width: "100%", height: "auto" }}
                     />
                     <Typography variant="caption" component="div">
                       painted by{" "}
@@ -92,8 +99,8 @@ const Home: NextPage<Props> = ({ aboutMeHTML, myLinksHTML, linksHTML }) => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={4}>
-            <Card>
+          <Grid item xs={4} style={{ display: "flex", alignItems: "stretch" }}>
+            <Card style={{ width: "100%" }}>
               <CardContent>
                 <Typography variant="h5" component="div">
                   まいりんく
@@ -104,7 +111,7 @@ const Home: NextPage<Props> = ({ aboutMeHTML, myLinksHTML, linksHTML }) => {
             </Card>
           </Grid>
           <Grid item xs={4}>
-            <Card>
+            <Card style={{ width: "100%" }}>
               <CardContent>
                 <Typography variant="h5" component="div">
                   ほかのひとのぶろぐとか
@@ -114,8 +121,8 @@ const Home: NextPage<Props> = ({ aboutMeHTML, myLinksHTML, linksHTML }) => {
               <CardActions></CardActions>
             </Card>
           </Grid>
-          <Grid item xs={8}>
-            <Card>
+          <Grid item xs={8} style={{ display: "flex", alignItems: "stretch" }}>
+            <Card style={{ width: "100%" }}>
               <CardContent>
                 <Typography variant="h5" component="div">
                   とくに役割のないカード

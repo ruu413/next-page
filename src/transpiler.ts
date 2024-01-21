@@ -3,8 +3,6 @@ import { unified } from "unified"
 import remarkParse from "remark-parse"
 import remarkRehype from "remark-rehype"
 import rehypeStringify from "rehype-stringify"
-import rehypeShiki from "@leafac/rehype-shiki"
-import * as shiki from "shiki"
 import remarkGfm from "remark-gfm"
 import rehypeHighlight from "rehype-highlight"
 import rehypeRaw from "rehype-raw"
@@ -14,11 +12,6 @@ export const markdownToHtml = async (markdown: string) =>
     .use(remarkParse) // Markdownをmdast(Markdownの抽象構文木)に変換
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true }) // mdastをhast(HTMLの抽象構文木)に変換
-    /*.use(rehypeShiki, {
-      highlighter: await shiki.getHighlighter({
-        theme: "nord",
-      }),
-    })*/ // shikiハイライターでコードブロックをハイライト
     .use(rehypeRaw)
     .use(rehypeSanitize)
     .use(rehypeStringify) // hastをHTMLに変換
