@@ -88,7 +88,7 @@ const Home: NextPage<Props> = ({ aboutMeHTML, myLinksHTML, linksHTML }) => {
                     />
                     <Typography variant="caption" component="div">
                       painted by{" "}
-                      <Link href="https://twitter.com/DAINZIA/">DAINZIA</Link>
+                      <Link href="https://twitter.com/DAINZIA_usayama">うさ山にこ</Link>
                     </Typography>
                   </Grid>
                   <Grid item xs={4} sm={1} md={1}></Grid>
