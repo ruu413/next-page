@@ -16,6 +16,7 @@ import Link from "next/link"
 
 const pages = new Map([
   ["とっぷ", "/"],
+  ["ぎゃらりー", "/gallery"],
   ["ぶろぐ", "/posts"],
 ])
 
