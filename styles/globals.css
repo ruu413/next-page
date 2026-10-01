@@ -82,6 +82,28 @@ main {
   text-underline-offset: 0.2em;
 }
 
+.article-body details {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+}
+
+.article-body summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.article-body details ol {
+  padding-left: 1.75rem;
+}
+
+.article-body details blockquote {
+  margin: 0.75rem 0;
+  padding-left: 0.75rem;
+  border-left: 3px solid #ddd;
+}
+
 .article-body th,
 .article-body td {
   padding: 0.5rem;

@@ -269,43 +269,375 @@ Blenderで組み込み、脚が通るよう不要な面を取り除いた状態�
 
 [姫希ひめの3Dモデルはこちら](https://hub.vroid.com/characters/2964447268666891023/models/3762699592295630385)。記事公開時点ではダウンロード可・クレジット必須、他の人のアバター利用と再配布は不可です。利用時はモデルページの最新条件を確認してください。
 
-## 制作中に出した指示（原文抜粋）
+## 制作中に出した指示 原文全件
 
-実際にChatGPTとAstraへ送った指示の一部です。表記はそのまま載せています。
+最初の画像生成4件と、3D制作102件の全106件です。「続けて」などの短い返事や質問への回答も含め、原文のまま時系列で掲載しています。添付画像は記事の冒頭に掲載し、添付ファイルの管理情報は省略しています。日付は日本時間です。
 
-**最初の画像生成**
+<details>
+<summary>ChatGPTで最初の画像生成（4件）</summary>
+<ol start="1">
+<li>
+<blockquote><p>このキャラクターを3D VTuberモデルに起こしたい　そのためにまずは画像生成でリファレンスとなる3D画像を出したい　商業VTuberくらい衣装は豪華で印象は崩さず</p></blockquote>
+</li>
+<li>
+<blockquote><p>両目開けて髪飾りはこれ</p></blockquote>
+</li>
+<li>
+<blockquote><p>これTripoでそのままつかえる？</p></blockquote>
+</li>
+<li>
+<blockquote><p>作って</p></blockquote>
+</li>
+</ol>
+</details>
 
-> このキャラクターを3D VTuberモデルに起こしたい　そのためにまずは画像生成でリファレンスとなる3D画像を出したい　商業VTuberくらい衣装は豪華で印象は崩さず
+<details>
+<summary>9月23日の制作（10件）</summary>
+<ol start="5">
+<li>
+<blockquote><p>Tripoでこれ使って3D VTuberモデル作りたいな</p></blockquote>
+</li>
+<li>
+<p><small>質問への回答</small></p>
+<blockquote><p>VRM</p></blockquote>
+</li>
+<li>
+<p><small>質問への回答</small></p>
+<blockquote><p>アカウント作っといて Google SSO使えるなら使って　Gmailは勝手に使って良いよ</p></blockquote>
+</li>
+<li>
+<blockquote><p>今Google ChromeでTripo開いてログインしといた</p></blockquote>
+</li>
+<li>
+<p><small>質問への回答</small></p>
+<blockquote><p>Proを自分で契約する（月額3,200円・自動更新／4枚・非公開で制作）</p></blockquote>
+</li>
+<li>
+<blockquote><p>やっといた</p></blockquote>
+</li>
+<li>
+<blockquote><p>やっぱ一回[https://www.tripo3d.ai/ja/blog/gpt-6-astra-3d-character-workflow](https://www.tripo3d.ai/ja/blog/gpt-6-astra-3d-character-workflow)の通りに作りたいかも、さっきの参照画像をボディ、頭部、髪に分解してる？</p></blockquote>
+</li>
+<li>
+<blockquote><p>これ4面なくていいの</p></blockquote>
+</li>
+<li>
+<blockquote><p>一体成形したやつの方が良さそうね、1回目のやつで進めて</p></blockquote>
+</li>
+<li>
+<blockquote><p>髪の動きは自然になるようにね、BlenderはComputer useで細かい作業進めても良いからね</p></blockquote>
+</li>
+</ol>
+</details>
 
-**Tripoで制作開始**
+<details>
+<summary>9月24日の制作（33件）</summary>
+<ol start="15">
+<li>
+<blockquote><p>髪の一部が顔の色になってるから直してね、髪と顔のポリゴンって分けた方がいいのかな</p></blockquote>
+</li>
+<li>
+<blockquote><p>あと肌の色不健康になってるからどうにかしてね、あとComputer useでBlender確認とか細かいとこ操作とかしていいからね</p></blockquote>
+</li>
+<li>
+<p><small>質問への回答</small></p>
+<blockquote><p>ロック解除した</p></blockquote>
+</li>
+<li>
+<blockquote><p>やっぱ3つのパーツで作ったやつ色々やった方がいい気がしてきた　3つのパーツのやつ首長すぎるから画像に合わせて</p></blockquote>
+</li>
+<li>
+<blockquote><p>髪小さくね、元画像と合わせてね</p></blockquote>
+</li>
+<li>
+<blockquote><p>続けて</p></blockquote>
+</li>
+<li>
+<blockquote><p>顔以外にも肌色あるよね</p></blockquote>
+</li>
+<li>
+<blockquote><p>パーツごとに分離して作り込んで完成度上げるとか出来る？</p></blockquote>
+</li>
+<li>
+<blockquote><p>頂点数はさいてきかしつつやってね</p></blockquote>
+</li>
+<li>
+<blockquote><p>続けて</p></blockquote>
+</li>
+<li>
+<blockquote><p>顔周りふっくらして見える気がする、元絵に合わせてね</p></blockquote>
+</li>
+<li>
+<blockquote><p>口開けてる姿をimagegenで作ってそれ参考に口の中作って</p></blockquote>
+</li>
+<li>
+<blockquote><p>顎削りすぎて斜めからみたとき変では</p></blockquote>
+</li>
+<li>
+<blockquote><p>元絵と見比べると髪が若干大きい？</p></blockquote>
+</li>
+<li>
+<blockquote><p>頭と髪と体パーツの大きさとか位置関係とか元絵に合わせてね</p></blockquote>
+</li>
+<li>
+<blockquote><p>3分割生成より頭+髪セットで生成の方がいい？</p></blockquote>
+</li>
+<li>
+<blockquote><p>やってみて、3分割版は目が死んでるから目をいい感じにしてね</p></blockquote>
+</li>
+<li>
+<blockquote><p>2分割の方が良さそうね</p></blockquote>
+</li>
+<li>
+<blockquote><p>続けて、ハートの髪飾りは作り直しといて</p></blockquote>
+</li>
+<li>
+<blockquote><p>完成度あげてね</p></blockquote>
+</li>
+<li>
+<blockquote><p>続けて</p></blockquote>
+</li>
+<li>
+<blockquote><p>続けて</p></blockquote>
+</li>
+<li>
+<blockquote><p>VRM反映は都度しなくてもいいからね</p></blockquote>
+</li>
+<li>
+<blockquote><p>リボンとか服とか独立したかざりは独立したポリゴンあって独立した色だと思うのだけどどう？</p></blockquote>
+</li>
+<li>
+<blockquote><p>形がじゃぎじゃぎしてたりするのだけどimagegenでいい感じにしたのを参考に作り込んでね</p></blockquote>
+</li>
+<li>
+<blockquote><p>独立パーツは取っても周りに違和感ない感じでね</p></blockquote>
+</li>
+<li>
+<blockquote><p>あと色もいい感じに</p></blockquote>
+</li>
+<li>
+<blockquote><p>ごめん1から作るの良くないね、戻して</p></blockquote>
+</li>
+<li>
+<blockquote><p>顔の表情作り込みたい</p></blockquote>
+</li>
+<li>
+<blockquote><p>商業モデル同等の表情差分欲しいな、あと目も動かしたい</p></blockquote>
+</li>
+<li>
+<blockquote><p>表情はimagegen参考にしてね、眉毛崩れてる？</p></blockquote>
+</li>
+<li>
+<blockquote><p>目が閉じてもまつ毛は消えないでね、目の可動はなんか切り取られたところが動かすと真っ白なのが違和感かも、目の範囲広く取って内部で動かすとか</p></blockquote>
+</li>
+<li>
+<blockquote><p>くり抜く範囲せまい、目の範囲もっと横にあるよね</p></blockquote>
+</li>
+</ol>
+</details>
 
-> Tripoでこれ使って3D VTuberモデル作りたいな
+<details>
+<summary>9月25日の制作（37件）</summary>
+<ol start="48">
+<li>
+<blockquote><p>目が明るすぎるから目の上の方に半透明で動かないシャドウを足したいかも？目尻ほど深く？</p></blockquote>
+</li>
+<li>
+<blockquote><p>閉じたときにまつ毛細くなってるよね、あと横に長すぎるよね</p></blockquote>
+</li>
+<li>
+<blockquote><p>目細くしたときに目の上と下で段差があるのが気になるな</p></blockquote>
+</li>
+<li>
+<blockquote><p>シャドウの位置合ってる？白目と黒目部分だよ、あと顔の肌に直接影焼き込まれないでね、あと表情一覧ほしい</p></blockquote>
+</li>
+<li>
+<blockquote><p>独立した影パーツは目の中だけだよ</p></blockquote>
+</li>
+<li>
+<blockquote><p>表情一覧は画像で貼って、影の範囲が目尻までいってないよ、めの下半分は明るいよ</p></blockquote>
+</li>
+<li>
+<blockquote><p>下半分はシャドウかからず明るくしてって言った</p></blockquote>
+</li>
+<li>
+<blockquote><p>目の中の上の方明るくなっちゃってるところない？シャドウかかってる？</p></blockquote>
+</li>
+<li>
+<blockquote><p>喜ぶときに上唇そりすぎて怖いかも、怒りと悲しみもっとがんばりたい</p></blockquote>
+</li>
+<li>
+<blockquote><p>マテリアル設定とかできる？</p></blockquote>
+</li>
+<li>
+<p><small>質問への回答</small></p>
+<blockquote><p>立体感と布・金属の質感を強める</p></blockquote>
+</li>
+<li>
+<blockquote><p>アニメ調な方が違和感ないな、あと太ももの輪っかが皮膚と境目ギザギザになってるの気になる</p></blockquote>
+</li>
+<li>
+<blockquote><p>全体として肌が顔に比べて暗い、服の白が汚れて見えるのでimagegenで陰影なし生成した色味あててみて</p></blockquote>
+</li>
+<li>
+<blockquote><p>流石にしろすぎ</p></blockquote>
+</li>
+<li>
+<blockquote><p>もうちょい陰影みせてもいいか</p></blockquote>
+</li>
+<li>
+<blockquote><p>VRMモデルVRoid hubにアップロードしといて</p></blockquote>
+</li>
+<li>
+<blockquote><p>Chromeでログインしてたはず</p></blockquote>
+</li>
+<li>
+<blockquote><p>限定効果とか出来るの</p></blockquote>
+</li>
+<li>
+<blockquote><p>公開でいいや</p></blockquote>
+</li>
+<li>
+<p><small>質問への回答</small></p>
+<blockquote><p>同意して公開登録してよい</p></blockquote>
+</li>
+<li>
+<blockquote><p>ダウンロードは可にしといて</p></blockquote>
+</li>
+<li>
+<blockquote><p>足動かすとふとももあたり破綻するね、直して</p></blockquote>
+</li>
+<li>
+<blockquote><p>口の中暗いのちょい怖いかも、あと笑ったときとか上唇が下に曲がらず上めに曲がって欲しいかも、あとスカート下の下着あたり破綻してそう</p></blockquote>
+</li>
+<li>
+<blockquote><p>いや下着足覆いすぎ 下半身あたりTripoで独立して生成した方がいい？</p></blockquote>
+</li>
+<li>
+<blockquote><p>じゃやって、下着の模様についてもimagegenで</p></blockquote>
+</li>
+<li>
+<blockquote><p>直接つくるよりやきこみでよくね</p></blockquote>
+</li>
+<li>
+<blockquote><p>投影か</p></blockquote>
+</li>
+<li>
+<blockquote><p>3Dイメージ図生成して投影してって言ってる</p></blockquote>
+</li>
+<li>
+<blockquote><p>ガーターベルト含めて作ってね、肌は元々のやつに馴染ませたい</p></blockquote>
+</li>
+<li>
+<blockquote><p>やっぱ変になるな、Tripoで作って</p></blockquote>
+</li>
+<li>
+<blockquote><p>足まで作っていいよ、靴は今までの使う感じ</p></blockquote>
+</li>
+<li>
+<blockquote><p>なんかデザイン変わってね？</p></blockquote>
+</li>
+<li>
+<blockquote><p>なんか旧部品ついてない？</p></blockquote>
+</li>
+<li>
+<blockquote><p>毎回VRMとかあぷろどしなくていいよ</p></blockquote>
+</li>
+<li>
+<blockquote><p>次はスカートより上の胴から肩周り生成し直したいな、腕は二の腕の肌が出てるところまで　胸元のリボンは分けて生成したいな　画像は4面要るかな</p></blockquote>
+</li>
+<li>
+<blockquote><p>首周りから肩もうちょい合ったよね</p></blockquote>
+</li>
+<li>
+<blockquote><p>もっと前あったよね</p></blockquote>
+</li>
+</ol>
+</details>
 
-**頭と髪の組み合わせ**
+<details>
+<summary>9月26日の制作（11件）</summary>
+<ol start="85">
+<li>
+<blockquote><p>うでほそすぎかも、前のやつと見比べて</p></blockquote>
+</li>
+<li>
+<blockquote><p>変更前の腕と肩使った方がいいかも？</p></blockquote>
+</li>
+<li>
+<blockquote><p>胸周りのサイズも変わってる？合わせてね</p></blockquote>
+</li>
+<li>
+<blockquote><p>色々無理そうだから胴体取り替えは戻そうか</p></blockquote>
+</li>
+<li>
+<blockquote><p>アップロードしといて</p></blockquote>
+</li>
+<li>
+<blockquote><p>胸元のリボンの下の肌に黒が滲んでるのきになるな、あとまだスカート下の太ももあたり余分なポリゴンない？</p></blockquote>
+</li>
+<li>
+<blockquote><p>やっぱ再度胴作ったやつ縮尺とかぴったり揃えたらつかえない？</p></blockquote>
+</li>
+<li>
+<blockquote><p>腕まで新しいの使っていいよ</p></blockquote>
+</li>
+<li>
+<blockquote><p>それ終わったらスカートも同様に再生成して、リボンは別生成で</p></blockquote>
+</li>
+<li>
+<blockquote><p>やっぱ手まで含めて胴再生成かな、首まで生成して元の首とフィットさせて</p></blockquote>
+</li>
+<li>
+<blockquote><p>絵は元の参照画像から1から作り直してね</p></blockquote>
+</li>
+</ol>
+</details>
 
-> 3分割生成より頭+髪セットで生成の方がいい？
+<details>
+<summary>9月30日の制作（10件）</summary>
+<ol start="96">
+<li>
+<blockquote><p>ちゃんとリグ入ってる？</p></blockquote>
+</li>
+<li>
+<blockquote><p>破綻ない？</p></blockquote>
+</li>
+<li>
+<blockquote><p>tripoってスマートuvとか利トポロジーとかできたっけ</p></blockquote>
+</li>
+<li>
+<blockquote><p>リトぽって生成時より品質上がるの？</p></blockquote>
+</li>
+<li>
+<blockquote><p>スカートとか揺れもの物理演算みたいなんできる？太ももぶつかっても動く的な</p></blockquote>
+</li>
+<li>
+<blockquote><p>**肩・袖**：フリルのギザつきと肌色が混ざる箇所が残っています。これ直して欲しいな</p></blockquote>
+</li>
+<li>
+<blockquote><p>他に滲んでるとこあったりする？</p></blockquote>
+</li>
+<li>
+<blockquote><p>直してね、あと髪とか後ろの飾りも物理演算できる？</p></blockquote>
+</li>
+<li>
+<blockquote><p>色合い胴が少し違っちゃって見えるかも</p></blockquote>
+</li>
+<li>
+<blockquote><p>終わったらアップロードしてね</p></blockquote>
+</li>
+</ol>
+</details>
 
-**口の中も画像生成を参考に**
-
-> 口開けてる姿をimagegenで作ってそれ参考に口の中作って
-
-**下半身を作り直す範囲**
-
-> 足まで作っていいよ、靴は今までの使う感じ
-
-**上半身と参照画像を作り直す**
-
-> やっぱ手まで含めて胴再生成かな、首まで生成して元の首とフィットさせて
-
-> 絵は元の参照画像から1から作り直してね
-
-**スカートとリボンを分ける**
-
-> それ終わったらスカートも同様に再生成して、リボンは別生成で
-
-**揺れと脚の当たり判定**
-
-> スカートとか揺れもの物理演算みたいなんできる？太ももぶつかっても動く的な
+<details>
+<summary>10月1日の制作（1件）</summary>
+<ol start="106">
+<li>
+<blockquote><p>クレジット表記設定ONにしといて、アバター名姫希ひめでついったー@himeki_princessURL載せといて</p></blockquote>
+</li>
+</ol>
+</details>
 
 ## 失敗したところまとめ
 
