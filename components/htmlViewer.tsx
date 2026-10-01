@@ -2,7 +2,6 @@ import React from "react"
 import rehypeParse from "rehype-parse"
 import rehypeReact from "rehype-react"
 import { unified } from "unified"
-import Image from "next/image"
 import CustomLink from "./customLink"
 // HTMLをReactへ変換する関数
 const processor = unified()
@@ -11,6 +10,9 @@ const processor = unified()
     createElement: React.createElement,
     components: {
       a: (props: any) => <CustomLink {...props} />, // ←ここで、<a>を<CustomLink>に置き換えるよう設定
+      // Static article images keep their source dimensions and load as readers scroll.
+      // eslint-disable-next-line @next/next/no-img-element
+      img: (props: any) => <img {...props} loading="lazy" decoding="async" />,
     },
   })
 const HTMLViewer = ({ html }: { html: string }) => {
