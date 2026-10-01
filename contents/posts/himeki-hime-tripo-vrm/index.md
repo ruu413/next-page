@@ -15,7 +15,13 @@ tags: ["3D", "VTuber", "Blender", "Tripo"]
   <figcaption>胴の白い布の色合わせまで反映したBlender編集版。</figcaption>
 </figure>
 
-画像はすべて実際の3Dモデルのレンダーです。初期の試作も含みます。タップすると大きく表示できます。
+「入力」と記した画像はImagegenで作ってTripoへ渡した参照画像、それ以外は実際の3Dモデルのレンダーです。タップすると拡大できます。
+
+## Imagegenの出力をTripoの入力にする
+
+**元の4方向画像 → Imagegenで部品別の画像を生成 → Tripoで3D化 → Blenderで組み込み・調整。**
+
+パーツごとに必要な形だけを描き分け、頭や体は正面・左右・背面、リボンは正面・側面をTripoへ入力しました。髪の長さや手の向きがずれたときは、入力画像の段階から直しています。
 
 ## 最初に失敗した3つの作り方
 
@@ -30,7 +36,20 @@ tags: ["3D", "VTuber", "Blender", "Tripo"]
 
 ### 顔と髪を分ける
 
-体・頭・髪を別生成したら、首が長く、髪は小さくなりました。飾りの重複や後頭部の頭皮も見つかり、パーツ同士の寸法合わせに手間がかかりました。
+まずImagegenで頭と髪を分けた参照画像を作り、それぞれをTripoで3D化しました。
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/input-head.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/input-head.jpg" width="1230" height="1278" alt="入力：髪を除いた頭部の正面。"></a>
+  <figcaption>入力：髪を除いた頭部の正面。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/input-hair.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/input-hair.jpg" width="1206" height="1305" alt="入力：顔と体を除いた髪の正面。"></a>
+  <figcaption>入力：顔と体を除いた髪の正面。</figcaption>
+</figure>
+</div>
+
+体・頭・髪を組み合わせると、首が長く、髪は小さくなりました。飾りの重複や後頭部の頭皮も見つかり、寸法合わせに手間がかかりました。
 
 <figure>
   <a href="/images/posts/himeki-hime-tripo-vrm/three-part-trial.png"><img src="/images/posts/himeki-hime-tripo-vrm/three-part-trial.png" width="1200" height="1200" alt="体・頭・髪を仮組みした3パーツ版。"></a>
@@ -52,6 +71,13 @@ tags: ["3D", "VTuber", "Blender", "Tripo"]
 
 ### 腕を残して胴だけ作る
 
+胴中心の参照もImagegenで用意し、Tripoへ渡しました。
+
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/input-torso.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/input-torso.jpg" width="1254" height="1254" alt="入力：胴中心の正面。肩と短い上腕を含み、袖・前腕・手は除外。"></a>
+  <figcaption>入力：胴中心の正面。肩と短い上腕を含み、袖・前腕・手は除外。</figcaption>
+</figure>
+
 既存の腕や袖につなぐ案も、胸・肩の比率や接続の調整が続き、一度元へ戻しました。胴を合わせ直し、生成した肩と上腕も使う案を経て、最後は袖・腕・手先までまとめて再生成しています。
 
 <div class="article-gallery">
@@ -67,7 +93,28 @@ tags: ["3D", "VTuber", "Blender", "Tripo"]
 
 ## ベースは「体＋頭と髪」に
 
-頭と髪は一緒に生成し、Blenderで顔・毛束・飾りに分けました。生成時にまとめる単位と、編集するときの分け方は別に考えています。パーツ用の参照画像にはImagegenも使いました。
+頭と髪をまとめた4方向の画像をImagegenで作り、髪の長さを直してTripoへ入力しました。
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/input-headhair-front.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/input-headhair-front.jpg" width="1254" height="1254" alt="入力：頭と髪をまとめた正面。"></a>
+  <figcaption>入力：頭と髪をまとめた正面。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/input-headhair-left.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/input-headhair-left.jpg" width="1254" height="1254" alt="入力：頭と髪の左側。"></a>
+  <figcaption>入力：頭と髪の左側。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/input-headhair-right.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/input-headhair-right.jpg" width="1254" height="1254" alt="入力：頭と髪の右側。"></a>
+  <figcaption>入力：頭と髪の右側。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/input-headhair-back.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/input-headhair-back.jpg" width="1254" height="1254" alt="入力：頭と髪の背面。"></a>
+  <figcaption>入力：頭と髪の背面。</figcaption>
+</figure>
+</div>
+
+3D化後はBlenderで顔・毛束・飾りに分けました。下は体と組み合わせた実モデルです。
 
 <div class="article-gallery">
 <figure>
@@ -120,7 +167,14 @@ tags: ["3D", "VTuber", "Blender", "Tripo"]
 
 ## 上半身とスカートを作り直す
 
-上半身は首から手先まで再生成し、30本の指ボーンを合わせ直しました。腕上げや指曲げなど、17状態で変形を確認しています。
+上半身は元の4枚に戻り、Imagegenで首から手先までの参照を作り直しました。左右の参照は手の向きもそろえてから使っています。
+
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/input-upper-body.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/input-upper-body.jpg" width="1774" height="887" alt="入力：元の4枚から作り直した上半身の正面。今度は袖・腕・手先まで含めた。"></a>
+  <figcaption>入力：元の4枚から作り直した上半身の正面。今度は袖・腕・手先まで含めた。</figcaption>
+</figure>
+
+Tripoで再生成し、30本の指ボーンを合わせ直しました。腕上げや指曲げなど、17状態で変形を確認しています。
 
 <div class="article-gallery">
 <figure>
@@ -133,7 +187,20 @@ tags: ["3D", "VTuber", "Blender", "Tripo"]
 </figure>
 </div>
 
-下半身も再生成し、左右で違うストッキングの高さを維持。スカートとエプロン、前後の大きなリボンは別途作り直し、脚が通るよう不要な面を取り除きました。
+下半身も再生成し、左右で違うストッキングの高さを維持。スカートとエプロン、前後の大きなリボンも、Imagegenの参照から別々に3D化しました。
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/input-skirt.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/input-skirt.jpg" width="1254" height="1254" alt="入力：リボンを外したスカートとエプロン。"></a>
+  <figcaption>入力：リボンを外したスカートとエプロン。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/input-rear-bow.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/input-rear-bow.jpg" width="1086" height="1448" alt="入力：別パーツとして作る後ろリボン。"></a>
+  <figcaption>入力：別パーツとして作る後ろリボン。</figcaption>
+</figure>
+</div>
+
+Blenderで組み込み、脚が通るよう不要な面を取り除いた状態です。
 
 <div class="article-gallery">
 <figure>
