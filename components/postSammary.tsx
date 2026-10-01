@@ -5,7 +5,14 @@ import Link from "next/link"
 const PostSammary = ({ post }: { post: PostData }) => {
   return (
     <>
-      <Typography variant="h2">
+      <Typography
+        variant="h2"
+        sx={{
+          fontSize: { xs: "1.75rem", md: "2.5rem" },
+          lineHeight: 1.4,
+          overflowWrap: "anywhere",
+        }}
+      >
         <Link href={post.path}>{post.title}</Link>
       </Typography>
       <Typography variant="body2">日にち: {post.date}</Typography>

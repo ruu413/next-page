@@ -22,3 +22,27 @@ main {
 * {
   box-sizing: border-box;
 }
+
+.article-body {
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.article-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+}
+
+.article-body a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.article-body th,
+.article-body td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}

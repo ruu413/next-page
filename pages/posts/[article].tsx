@@ -41,7 +41,9 @@ const Article: FC<Props> = ({ post }) => {
         <Card>
           <CardContent>
             <PostSammary post={post} />
-            <HTMLViewer html={post.articleHTML} />
+            <div className="article-body">
+              <HTMLViewer html={post.articleHTML} />
+            </div>
           </CardContent>
         </Card>
       </main>
