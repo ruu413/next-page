@@ -35,6 +35,48 @@ main {
   margin: 1.5rem auto;
 }
 
+.article-body figure {
+  margin: 1.5rem 0;
+  min-width: 0;
+}
+
+.article-body figure img {
+  max-height: 760px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.article-body figcaption {
+  margin-top: 0.5rem;
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.article-body .article-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.article-body .article-gallery figure {
+  margin: 0;
+}
+
+.article-body .article-gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  background: #eee;
+}
+
+@media (max-width: 600px) {
+  .article-body .article-gallery {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .article-body a {
   text-decoration: underline;
   text-underline-offset: 0.2em;

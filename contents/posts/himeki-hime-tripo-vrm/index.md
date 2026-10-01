@@ -4,166 +4,231 @@ title: "TripoとBlenderで姫希ひめの3Dモデルを作った"
 tags: ["3D", "VTuber", "Blender", "Tripo"]
 ---
 
-姫希ひめの4方向の参照画像をもとに、TripoとBlenderで3D VTuberモデルを作りました。Codexと一緒に生成・修正・動作確認を繰り返して、VRM 1.0として書き出し、VRoid Hubで公開するところまで進めています。
+姫希ひめの4方向の参照画像から、TripoとBlenderで3Dモデルを作りました。Codexと一緒に生成・修正を繰り返し、表情と揺れを付けてVRoid Hubで公開しています。
 
-見た目を立体にするだけでも楽しいのですが、まばたきや口パク、視線、髪や服の揺れを付けると、静止画では分からなかった問題がかなり見えてきました。今回は、生成したモデルを動かせる状態へ持っていくまでの制作記録です。うまくいかずに戻した試作や、書き出して初めて気づいた不具合も紹介します。
+全身を一回で作る、顔と髪を分ける、腕を残して胴だけ作る。どれも試してやり直しました。その過程を、画像中心に紹介します。
 
 [VRoid Hubで姫希ひめを見る](https://hub.vroid.com/characters/2964447268666891023/models/3762699592295630385) · [Xの @himeki_princess](https://x.com/himeki_princess)
 
-![胴の色合わせまで反映した姫希ひめの全身レンダー](/images/posts/himeki-hime-tripo-vrm/full-body.png)
-
-*胴の白い布の色合わせまで反映したBlender編集版。記事中の画像は実際の3Dモデルをレンダリングしたものです。*
-
-## 一体生成から部品ごとの生成へ
-
-最初は全身を一回でまとめて生成しましたが、それだけで使えるVTuberモデルにはなりませんでした。次に体・頭・髪を別々に生成した3パーツ版も試しましたが、首が長い、髪のボリュームが足りない、といった組み合わせの問題が出ています。一度は一体版の方がよさそうだと戻り、その後また3パーツ版を調整する、という行き来もありました。
-
-さらに頭と髪を一緒に生成したものも比較し、制作のベースには「体＋頭と髪のセット」を採用しました。生成時にまとめる単位と、Blenderで編集する単位は別です。頭と髪を一緒に生成しても、その後で顔・毛束・飾りなどに分け、必要な部分を選んで触れるようにしています。
-
-パーツ用の参照画像にはImagegenも使いました。元の4枚をデザインの基準にして、Tripoへ渡す正面・側面・背面などの画像を用意する流れです。途中の修正を重ねるうちに元の衣装から離れそうな箇所は、元画像に戻って参照を作り直しました。
-
-## 目と口を動かせる構造にする
-
-顔はかなり手を入れたところです。生成された顔の見た目を保ちながら、白目と虹彩を分け、白目は頭に固定して虹彩だけを眼球のボーンで動かす構造にしました。虹彩には完全な円形の画像を用意し、左右・上下に視線を動かしても欠けた部分が出にくくしています。
-
-まばたきも、単に目を細くするだけではうまくいきませんでした。半目でまぶたに段差が出たり、元の顔テクスチャの虹彩が前に出たりするため、眼窩の奥行きと閉じる途中の位置を調整。閉じたときのまつ毛は独立したメッシュにして、変形後の顔の表面に沿わせています。
-
-目の上半分の影にもこだわりました。白目と虹彩に影を重ねつつ、下半分は明るいままにし、視線を動かしても影の位置が頭に対してずれないようにしています。
-
-![白目と虹彩の上半分に影を重ねた目元の拡大](/images/posts/himeki-hime-tripo-vrm/eye-detail.png)
-
-口には暗い口腔、上の歯、舌を追加し、あいうえおの口形と連動させました。後から「口の中が暗すぎる」「笑ったときに上唇が下へ曲がって見える」といった点も修正しています。
-
-喜び・怒り・悲しみ・穏やか・驚き・笑顔・左右のウインク・片側の笑み・不満・眠い、という11種類の表情も作りました。眉、目の開き、口角は個別に調整できます。
-
-![通常と11種類の表情を並べた制作途中の一覧](/images/posts/himeki-hime-tripo-vrm/expressions.png)
-
-*9月25日時点の表情確認シート。画像内の「VRM未更新」は撮影時点の状態で、その後の公開版には表情を反映しています。口元や衣装には、この画像の後にも修正を加えています。*
-
-## 胴体とスカートを再生成する
-
-全体が動くようになってからも、体や衣装は何度か作り直しました。脚を動かすと太ももやガーターが引き伸ばされる問題は、まずボーンの影響度であるウェイトを修正。その後、下半身を独立して生成し直し、左右で異なるストッキングの高さや飾りを残して組み込みました。
-
-上半身は部分的な差し替えも試しましたが、最終的には首から腰、袖、腕、手先までをまとめて再生成しています。既存の頭側の首に位置を合わせ、30本の指ボーンを新しい手の形に合わせ直しました。首の接続、腕上げ、肘や手首、左右10本の指の個別曲げなど、17状態で変形を確認しています。
-
-スカートとエプロンもTripoで再生成し、前後の大きなリボンは別生成の独立パーツにしました。生成直後には腰や裾を塞ぐ面があったので、それを取り除き、脚が通る形に修正。裏地も追加しています。
-
-飾りが服の表面に描かれているだけだと、後から位置や色を変えたり、揺らしたりするのが難しくなります。胸や腰のリボン、ハートと羽の髪飾りなどは、個別に形や材質を調整できるようにしました。ただし、細い鎖やレースのすべてを独立した立体にしたわけではなく、生成された表面やテクスチャで表現している部分も残っています。
-
-## 肌と白い布の色をそろえる
-
-別々に生成した部品を組み合わせると、顔と体の肌色や、胴とスカートの白が少しずつ違って見えます。光沢を強くする試作もしましたが、今回は柔らかいアニメ調の陰影に寄せました。
-
-肌は顔に近い明るさと赤みに調整し、白い布に混ざった肌色や黒い斑点は範囲を絞って補正。肩・袖のフリルの角張り、背中の襟と肩ひも、太もものレース、手首・足首のリボンなどを順に直しています。
-
-最後に、胸元と袖の灰紫っぽさを弱めてスカートの白に合わせました。しわの陰影は残しつつ、全身で見たときの色の差を抑えています。
-
-形状の修正も、必要な箇所だけに絞りました。肩や袖のフリルには局所的に800頂点を追加しましたが、その後の色合わせと背面リボンの揺れの追加では頂点数を増やしていません。最新のBlender編集版は73,501頂点です。
-
-## 髪とスカートと背面リボンを揺らす
-
-揺れにはVRMのSpringBoneを使っています。骨の連なりをばねのように動かす仕組みで、髪や衣装の部分ごとに設定を分けました。
-
-| 部位 | 揺れの系統数 | 調整したこと |
-| --- | ---: | --- |
-| 髪 | 7 | 前髪、ボブ、ツインテールなどの揺れ方と体への当たり方 |
-| スカート | 12 | 腰を固定し、裾と裏地、小リボンを追従させる |
-| 背面リボン | 4 | 結び目を固定し、左右の内側と外側を別々に動かす |
-
-公開版には計23系統の揺れと、12個の当たり判定を入れました。頭や胴を動かしたときの追従、脚を上げたときの干渉などを確認しています。
-
-ただし、これは骨と当たり判定による布の近似です。スカートの確認では、前への脚上げ35度や開脚25度などで表地と脚の交差を検出しなかった一方、70度の深い脚上げでは貫通や引きつれが残りました。裏地にも隠れた重なりがあり、どんな動きでも布が脚を避ける状態ではありません。
-
-## BlenderからVRMへ書き出して公開する
-
-編集の途中からは、修正するたびにVRMを出力するのをやめ、Blenderでまとめて調整してから公開版へ反映しました。比較画像と変更前のファイルを残していたので、試した結果が合わなければ前の状態へ戻せます。
-
-書き出しでは、Blenderの表示をそのまま持っていけない部分がありました。材質ノードで行った布の色補正は、照明を焼き込まずにベース色と陰影用のテクスチャへ変換。頭の座標を使っていた目の影も、頭に追従する透明メッシュと照明の影響を受けない材質へ置き換えました。
-
-表情とまばたきを組み合わせるBlenderのドライバーも、そのまま標準VRMの機能にはなりません。感情ごとの閉じ目を専用のカスタム表情として追加していますが、配信アプリ側で自動的に切り替えるには、その表情への対応付けが必要です。
-
-書き出したVRMは空のBlenderへ再読み込みし、不正な頂点とウェイト未設定の頂点がどちらも0であること、テクスチャが内包されていることを確認しました。54本のHumanoidボーン、表情、揺れの設定を検査し、ブラウザのビューアでも歩行、頭と胴の動き、閉眼、視線を確認しています。VRoid Hubへの差し替え後も3D表示を確認しました。
-
-最新の公開モデルはVRM 1.0です。制作途中にはVRM 0.xも検証しましたが、今回の最新修正を反映した公開版とは区別しています。
-
-公開名は「姫希ひめ」にし、クレジット表記を必須に設定しました。表記名は「姫希ひめ（@himeki_princess）」で、プロフィールとVRM内にもXのURLを入れています。再書き出しで戻らないよう、名前とクレジットの設定は編集用データにも反映しました。
-
-記事公開時点では全体公開・ダウンロード可ですが、他の人のアバター利用と再配布は不可の設定です。利用する際は、[VRoid Hubのモデルページ](https://hub.vroid.com/characters/2964447268666891023/models/3762699592295630385)で現在の利用条件を確認してください。
-
-## 失敗したところとやり直したこと
-
-大きくやり直したのは、そもそもモデルをどんな単位で生成するか、という部分でした。全身を一回で作る、顔と髪を分ける、腕を作り直さず胴だけ差し替える。それぞれ試しましたが、今回のモデルではそのまま採用できず、生成範囲や組み込み方を変えています。まずその3つ、その後に細部の修正で起きた失敗を紹介します。
-
-### 全身を一回で作っても仕上げは済まなかった
-
-最初の一体版は、全身の4方向画像からまとめて生成したモデルです。3パーツ版と比べて、一度はこちらを使う方針にも戻しました。ただ、編集を進めると髪の一部に肌色が混ざっていることや、肌が不健康に見えることが気になりました。
-
-顔・髪・体などが一つのメッシュに入っていたため、Blenderで領域を選り分け、髪の色を補正し、表情や髪の揺れを付ける作業が必要でした。全身を一回で生成できても、各部を狙いどおりに動かしたり、見た目を直したりする工程は残ります。今回はこの一体版を最終モデルにする方法を見送り、部品ごとの生成へ戻りました。
-
-![全身を一括生成したモデルを元に分離と表情付けを試していた段階の顔](/images/posts/himeki-hime-tripo-vrm/monolithic-trial.png)
-
-*一体版を元に、分離や表情付けを試していた途中のレンダー。現在の公開モデルとは顔や髪の質感がかなり違います。*
-
-### 顔と髪を別生成したら合わせ直しが増えた
-
-体・頭・髪を別々に生成すれば、それぞれを作り込みやすくなると考えて試しました。各パーツに4方向の参照を用意しましたが、組み合わせると首が長く、髪は元画像より小さく見え、髪飾りも重複していました。後頭部には頭皮が見える箇所もありました。
-
-頭と髪を約4.2cm下げて首を短くし、ボブやツインテールの幅を調整。後頭部のカバーを足し、重複した飾りも取り除いています。分割したことで、顔と髪の寸法や接する位置を合わせる作業が増えました。
-
-![体と頭と髪を別々に生成して仮組みした初期の3パーツ版](/images/posts/himeki-hime-tripo-vrm/three-part-trial.png)
-
-*3パーツ版の初期の仮組み。ここから首の長さや髪の大きさを調整しました。*
-
-この版も動くVRMの試作までは進めましたが、最終的な制作のベースには、頭と髪を一緒に生成した版を採用しました。その後にBlenderで顔・髪・飾りを分けています。「別々に生成する」ことと「後から別々に編集できるようにする」ことを、分けて考えるようになった工程です。
-
-### 腕を作り直さず胴だけ差し替える案もやり直した
-
-上半身では、腕を残して胴だけを新しくし、既存の腕や袖につなぐ方針を試しました。しかし、胴を差し替えれば終わりにはならず、胸や肩の比率、首や腕との接続を何度も合わせ直すことになりました。一度は胴・胸・肩・腕を差し替え前へ戻し、その後、生成した胴を以前の比率に合わせて組み込み直しています。
-
-途中では生成済みの肩と短い上腕も使い、元の袖・前腕・手を残す構成に変更しました。上腕の太さを元の腕に合わせ、接続部を袖の内側へ収める調整もしています。
-
-最終的には元の4枚から参照画像を作り直し、首から胴、腕、袖、手先までをまとめて再生成しました。顔・表情・髪と採用済みの下半身を残しつつ、上半身を一続きの範囲で作り直した形です。今回の肩や腕では、接続箇所ごとに合わせる方法から、生成する範囲そのものを広げる方法へ切り替えることになりました。
-
-### 衣装を一から作り直す案を撤回した
-
-生成された衣装を整える途中で、Blender側で衣装を一から作り直す試作に進んだことがありました。ただ、この方向は採用せず、作り直し前のモデルへ戻しています。試作の形状と材質も、使うモデルには残していません。
-
-その時点では、既存の形状を活かして、気になる部分だけを直す方針に切り替えました。後にスカートをTripoで再生成したときも、元の参照画像を基準にし、部品ごとに比較して組み込む手順を取りました。作り直す範囲を広げる前に、どの部分を残したいか決めておく必要がありました。
-
-### インナーを足したら太ももを覆いすぎた
-
-スカートの下の破綻を補うため、長めのインナーを追加したところ、太ももの露出を覆いすぎてしまいました。元の衣装の見え方を変えてしまうため、この形状と脚の付け根の変更は取り消し、脚の形状とウェイトを元へ戻しています。
-
-短い下着をBlenderで補う別案も採用せず、最終的にはTripoで腰から脚までを再生成しました。その参照作りでも、左右対称の花柄やおそろいの太ももバンドへ寄った案は不採用にしています。元画像の左右で異なるストッキングの高さや片側のバンドを守ることが、修正の基準になりました。
-
-### 白さや光沢を強めすぎた
-
-肌色や白い布の色むらを直すときにも、調整を強くしすぎました。白い色見本を混ぜる割合を90%にした試作では、布の弱い陰影や折り目が薄くなっています。そこから混合を62%へ下げ、白の明るさも少し抑えて、立体感を戻しました。
-
-![左は白さを強めすぎた試作で右は明るさを抑えて布の陰影を戻した状態](/images/posts/himeki-hime-tripo-vrm/white-rebalance.png)
-
-*9月25日時点の比較。左が白を強めた試作、右が再調整後です。同じ照明で比較しており、現在の公開版より前の衣装です。画像内の「VRM未更新」も、この時点の状態を示しています。*
-
-光沢を強めたPBR材質の試作も、今回目指した柔らかいアニメ調には採用しませんでした。元のアニメ調へ戻し、布の凹凸を強調するノーマルの強度を下げています。色をきれいにすることと、しわや重なりを読み取れるようにすることは、両方を見ながら調整する必要がありました。
-
-### 新しい下半身の後ろに古いパーツが残っていた
-
-下半身の再生成後、古い脚やガーターの一部をスカートの裏地と取り違えて残していました。新しい太ももの後ろに旧モデルの断片が重なり、脚を動かしてもその場に残る部分があった、という組み込み時のミスです。
-
-調べ直して古い下半身の残骸を取り除き、この修正では1,128頂点を削除しました。新しい下半身と元の靴、足首の飾りはそのまま保持しています。部品名だけでは判断できず、背面や脚を動かした状態で、実際にどの面が残っているかを確認する必要がありました。
-
-### Blenderで動く口内がVRMでは無効になった
-
-制作途中のVRM 0.x出力では、Blenderで動いていた口内のモーフが、書き出すと無効になる問題がありました。口内のモーフは、口を開けるときに歯や舌などの形を変えるためのデータです。
-
-このときは書き出し用の一時シーンだけでドライバーを外して修正し、編集用のBlenderには元の連動設定を残しました。その後、VRMを再読み込みし、ブラウザのビューアでも開口・閉口を確認しています。編集画面で動いていることに加えて、書き出したファイルでも同じ動作を確かめる必要がありました。これは途中で検証した互換版の話で、最新の公開モデルはVRM 1.0です。
-
-## 動かしてみて分かったこと
-
-今回いちばん手がかかったのは、生成した各パーツのつなぎ目と、表情や動きが入ったときの整合でした。頭と髪、胴と腕のように形が連続する部分は、生成時にまとめ、その後で編集用に分ける進め方へ落ち着いています。静止画では自然に見える目も、視線を動かして半目にすると別の問題が出てきます。衣装も、立った状態だけでなく脚を上げて確認する必要がありました。
-
-Tripoで形を用意し、Imagegenで参照や補修素材を作り、Blenderで構造と動きを調整する。それぞれを行き来しながら、Codexで修正用のスクリプトや比較画像、検証記録を作って進めた制作でした。
-
-細い毛束やレースの粗さ、極端なポーズでの干渉、実際の配信アプリでのトラッキングや負荷の確認はまだ残っています。ARKitの52チャンネルへの対応も未検証です。それでも、元の4枚から表情や揺れのあるモデルを作り、VRoid Hubで見られるところまで持っていけました。
-
-[姫希ひめの3Dモデルはこちら](https://hub.vroid.com/characters/2964447268666891023/models/3762699592295630385)。制作後の様子は [@himeki_princess](https://x.com/himeki_princess) へ。
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/full-body.png"><img src="/images/posts/himeki-hime-tripo-vrm/full-body.png" width="1000" height="1400" alt="胴の白い布の色合わせまで反映したBlender編集版。"></a>
+  <figcaption>胴の白い布の色合わせまで反映したBlender編集版。</figcaption>
+</figure>
+
+画像はすべて実際の3Dモデルのレンダーです。初期の試作も含みます。タップすると大きく表示できます。
+
+## 最初に失敗した3つの作り方
+
+### 全身を一回で作る
+
+全身の一体生成から始めましたが、髪に肌色が混ざったり、肌が不健康に見えたりしました。顔・髪・体の分離、色の補正、表情付けは別に必要で、今回は最終モデルへの採用を見送りました。
+
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/monolithic-trial.png"><img src="/images/posts/himeki-hime-tripo-vrm/monolithic-trial.png" width="900" height="900" alt="一体版で分離と表情付けを試していた頃。公開版とは顔や髪の質感が違います。"></a>
+  <figcaption>一体版で分離と表情付けを試していた頃。公開版とは顔や髪の質感が違います。</figcaption>
+</figure>
+
+### 顔と髪を分ける
+
+体・頭・髪を別生成したら、首が長く、髪は小さくなりました。飾りの重複や後頭部の頭皮も見つかり、パーツ同士の寸法合わせに手間がかかりました。
+
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/three-part-trial.png"><img src="/images/posts/himeki-hime-tripo-vrm/three-part-trial.png" width="1200" height="1200" alt="体・頭・髪を仮組みした3パーツ版。"></a>
+  <figcaption>体・頭・髪を仮組みした3パーツ版。</figcaption>
+</figure>
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/neck-before.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/neck-before.jpg" width="1000" height="1000" alt="修正前：首が長く見える。"></a>
+  <figcaption>修正前：首が長く見える。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/neck-after.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/neck-after.jpg" width="1000" height="1000" alt="修正後：頭と髪を約4.2cm下げた。"></a>
+  <figcaption>修正後：頭と髪を約4.2cm下げた。</figcaption>
+</figure>
+</div>
+
+首や髪を直し、動くVRMの試作までは進めましたが、最終的には頭と髪を一緒に生成した版へ切り替えました。
+
+### 腕を残して胴だけ作る
+
+既存の腕や袖につなぐ案も、胸・肩の比率や接続の調整が続き、一度元へ戻しました。胴を合わせ直し、生成した肩と上腕も使う案を経て、最後は袖・腕・手先までまとめて再生成しています。
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/torso-original-arms.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/torso-original-arms.jpg" width="1100" height="1100" alt="途中案①：新しい胴を元の腕に合わせる。"></a>
+  <figcaption>途中案①：新しい胴を元の腕に合わせる。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/torso-generated-arms.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/torso-generated-arms.jpg" width="1100" height="1100" alt="途中案②：肩と上腕も生成版へ。袖・前腕・手は元のまま。"></a>
+  <figcaption>途中案②：肩と上腕も生成版へ。袖・前腕・手は元のまま。</figcaption>
+</figure>
+</div>
+
+## ベースは「体＋頭と髪」に
+
+頭と髪は一緒に生成し、Blenderで顔・毛束・飾りに分けました。生成時にまとめる単位と、編集するときの分け方は別に考えています。パーツ用の参照画像にはImagegenも使いました。
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/two-part-front.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/two-part-front.jpg" width="960" height="1280" alt="2パーツ版の正面。衣装や飾りはこの後も修正。"></a>
+  <figcaption>2パーツ版の正面。衣装や飾りはこの後も修正。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/two-part-side.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/two-part-side.jpg" width="960" height="1280" alt="同じ段階の側面。髪と体の位置関係を確認。"></a>
+  <figcaption>同じ段階の側面。髪と体の位置関係を確認。</figcaption>
+</figure>
+</div>
+
+## まばたき・口パク・表情
+
+白目は頭に固定し、虹彩だけを動かす構造にしました。半目の段差や虹彩の飛び出しを直し、閉じたまつ毛も顔の表面に合わせています。
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/half-blink.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/half-blink.jpg" width="900" height="900" alt="閉じる途中の半目を確認。"></a>
+  <figcaption>閉じる途中の半目を確認。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/blink.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/blink.jpg" width="900" height="900" alt="閉眼時のまぶたとまつ毛を確認。"></a>
+  <figcaption>閉眼時のまぶたとまつ毛を確認。</figcaption>
+</figure>
+</div>
+
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/eye-detail.png"><img src="/images/posts/himeki-hime-tripo-vrm/eye-detail.png" width="1200" height="500" alt="目の上半分に影を追加。視線を動かしても影は頭側に固定。"></a>
+  <figcaption>目の上半分に影を追加。視線を動かしても影は頭側に固定。</figcaption>
+</figure>
+
+口の中には歯と舌を追加。「暗すぎる口内」と「笑顔で下へ曲がる上唇」も直しました。
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/mouth-before.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/mouth-before.jpg" width="1000" height="850" alt="修正前：口内が暗く、上唇が下へ曲がる。"></a>
+  <figcaption>修正前：口内が暗く、上唇が下へ曲がる。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/mouth-after.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/mouth-after.jpg" width="1000" height="850" alt="修正後：口内を明るくし、上唇の形を調整。"></a>
+  <figcaption>修正後：口内を明るくし、上唇の形を調整。</figcaption>
+</figure>
+</div>
+
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/expressions.png"><img src="/images/posts/himeki-hime-tripo-vrm/expressions.png" width="1600" height="1510" alt="通常＋11種類の表情。9月25日時点の確認シートで、「VRM未更新」は当時の状態。後の公開版には反映済み。"></a>
+  <figcaption>通常＋11種類の表情。9月25日時点の確認シートで、「VRM未更新」は当時の状態。後の公開版には反映済み。</figcaption>
+</figure>
+
+## 上半身とスカートを作り直す
+
+上半身は首から手先まで再生成し、30本の指ボーンを合わせ直しました。腕上げや指曲げなど、17状態で変形を確認しています。
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/upper-body.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/upper-body.jpg" width="1400" height="744" alt="腕・袖・手先まで作り直した上半身。"></a>
+  <figcaption>腕・袖・手先まで作り直した上半身。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/finger-curl.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/finger-curl.jpg" width="900" height="900" alt="新しい手で指を曲げた確認画像。"></a>
+  <figcaption>新しい手で指を曲げた確認画像。</figcaption>
+</figure>
+</div>
+
+下半身も再生成し、左右で違うストッキングの高さを維持。スカートとエプロン、前後の大きなリボンは別途作り直し、脚が通るよう不要な面を取り除きました。
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/skirt-front.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/skirt-front.jpg" width="1100" height="1100" alt="再生成したスカートとエプロンの正面。"></a>
+  <figcaption>再生成したスカートとエプロンの正面。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/skirt-back.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/skirt-back.jpg" width="1100" height="1100" alt="背面。大きなリボンは独立したパーツ。"></a>
+  <figcaption>背面。大きなリボンは独立したパーツ。</figcaption>
+</figure>
+</div>
+
+## 飾り・フリル・白い布を整える
+
+髪飾りを薄く整え、袖の角張りを修正。別生成でずれた肌色や布の白も、全身を見ながら合わせました。
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/ornament-before.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/ornament-before.jpg" width="1000" height="1000" alt="修正前：厚みのあるハート飾り。"></a>
+  <figcaption>修正前：厚みのあるハート飾り。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/ornament-after.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/ornament-after.jpg" width="1000" height="1000" alt="修正後：薄い縁と羽の形に調整。"></a>
+  <figcaption>修正後：薄い縁と羽の形に調整。</figcaption>
+</figure>
+</div>
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/sleeve-before.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/sleeve-before.jpg" width="1100" height="900" alt="修正前：袖口のフリルが角張っている。"></a>
+  <figcaption>修正前：袖口のフリルが角張っている。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/sleeve-after.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/sleeve-after.jpg" width="1100" height="900" alt="修正後：局所的に頂点を増やして整えた。"></a>
+  <figcaption>修正後：局所的に頂点を増やして整えた。</figcaption>
+</figure>
+</div>
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/torso-color-before.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/torso-color-before.jpg" width="1100" height="1200" alt="修正前：胸元と袖が灰紫っぽい。"></a>
+  <figcaption>修正前：胸元と袖が灰紫っぽい。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/torso-color-after.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/torso-color-after.jpg" width="1100" height="1200" alt="修正後：しわの陰影を残してスカートの白へ。"></a>
+  <figcaption>修正後：しわの陰影を残してスカートの白へ。</figcaption>
+</figure>
+</div>
+
+## 揺れを付けると、別の問題が見える
+
+髪7系統、スカート12系統、背面リボン4系統のSpringBoneと、12個の当たり判定を設定しました。
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/ribbon-rest.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/ribbon-rest.jpg" width="700" height="1000" alt="背面リボンの動作確認：開始時。"></a>
+  <figcaption>背面リボンの動作確認：開始時。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/ribbon-motion.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/ribbon-motion.jpg" width="700" height="1000" alt="同じテストの途中。結び目を固定し、垂れた部分を動かす。"></a>
+  <figcaption>同じテストの途中。結び目を固定し、垂れた部分を動かす。</figcaption>
+</figure>
+</div>
+
+普通の脚上げでは改善しましたが、70度まで上げると貫通や引きつれが残りました。骨による簡易的な揺れなので、布全体の衝突を解いているわけではありません。
+
+<div class="article-gallery">
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/high-knee-before.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/high-knee-before.jpg" width="760" height="850" alt="物理なし：脚がスカートを突き抜ける。"></a>
+  <figcaption>物理なし：脚がスカートを突き抜ける。</figcaption>
+</figure>
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/high-knee-after.jpg"><img src="/images/posts/himeki-hime-tripo-vrm/high-knee-after.jpg" width="760" height="850" alt="物理あり：裾は上がるが、貫通と引きつれは残る。"></a>
+  <figcaption>物理あり：裾は上がるが、貫通と引きつれは残る。</figcaption>
+</figure>
+</div>
+
+## 細部でも失敗して戻した
+
+- **衣装を一から作り直す案**は撤回。元の形を活かし、必要な部分から直しました。
+- **長めのインナー**は太ももを覆いすぎたので取り消し。脚の形とウェイトも戻しました。
+- **白さや光沢の強めすぎ**で布の陰影が消えました。白の混合を90%から62%へ下げ、柔らかいアニメ調に戻しました。
+
+<figure>
+  <a href="/images/posts/himeki-hime-tripo-vrm/white-rebalance.png"><img src="/images/posts/himeki-hime-tripo-vrm/white-rebalance.png" width="1430" height="1062" alt="左：白を強めた試作。右：陰影を戻した状態。9月25日の比較で、衣装と「VRM未更新」の表示は当時のもの。"></a>
+  <figcaption>左：白を強めた試作。右：陰影を戻した状態。9月25日の比較で、衣装と「VRM未更新」の表示は当時のもの。</figcaption>
+</figure>
+
+- **古い下半身の残骸**を裏地と取り違えて残し、新しい脚の後ろに重ねてしまいました。背面と動作を見直し、1,128頂点を削除。
+- **Blenderで動く口内が、途中のVRM 0.xでは無効に**。書き出し用シーンのドライバーを外して修正し、再読み込みでも確認しました。
+
+## VRMで公開
+
+色補正と目の影をVRMで使える形へ変換し、表情・視線・揺れを再読み込みとブラウザで確認。最新の公開モデルはVRM 1.0です。
+
+部品のつなぎ目と、動かしたときの破綻に一番手がかかりました。極端なポーズ、配信アプリでの追従や負荷、ARKitの52チャンネル対応はまだ確認が残っています。
+
+[姫希ひめの3Dモデルはこちら](https://hub.vroid.com/characters/2964447268666891023/models/3762699592295630385)。記事公開時点ではダウンロード可・クレジット必須、他の人のアバター利用と再配布は不可です。利用時はモデルページの最新条件を確認してください。
